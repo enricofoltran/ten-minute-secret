@@ -1,0 +1,9 @@
+Django==1.8.5
+pytz==2015.6
+django-csp==2.0.3
+whitenoise==2.0.4
+cryptography==1.0.2
+django-crispy-forms==1.5.2
+crispy-forms-foundation==0.5.3
+
+-e django-secrets/

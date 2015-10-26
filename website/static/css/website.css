@@ -1,0 +1,36 @@
+.top-bar {
+    margin-bottom: 1em;
+    background: #417690;
+    color: #FFC;
+}
+
+.top-bar h1, .top-bar h1 a:link, .top-bar h1 a:visited {
+    color: #F4F379;
+}
+
+section[role=main] {
+    margin-top: 1em;
+}
+
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0px 0px 10px;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #F5F5F5;
+    border: 1px solid #CCC;
+}
+
+code, kbd, pre, samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+}
+
+pre {
+    overflow: auto;
+}
