@@ -1,5 +1,5 @@
 .top-bar {
-    margin-bottom: 1em;
+    margin-bottom: 2.250rem;
     background: #417690;
     color: #FFC;
 }
@@ -18,16 +18,16 @@
 }
 
 section[role=main] {
-    margin-top: 1em;
+    margin-top: 1.125rem;
 }
 
-footer[role=contentinfo] {
+footer {
     color: #CCC;
 }
 
-footer[role=contentinfo] a:link,
-footer[role=contentinfo] a:focus,
-footer[role=contentinfo] a:visited,
-footer[role=contentinfo] a:active {
+footer a:link,
+footer a:focus,
+footer a:visited,
+footer a:active {
     color: #888;
 }

@@ -41,7 +41,13 @@
 
     {% block header_wrapper %}
     <header role="banner">
-        {% block header %}{% endblock %}
+        {% block header %}
+            <div class="row">
+                <div class="column large-12 text-center">
+                    <h4>Share encrypted messages easily, they last 10 minutes.</h4>
+                </div>
+            </div>
+        {% endblock %}
     </header>
     {% endblock %}
 

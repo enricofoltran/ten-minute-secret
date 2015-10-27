@@ -26,7 +26,7 @@ class SecretCreateForm(forms.ModelForm):
         widgets = {
             'data': forms.Textarea(attrs={
                 'cols': 100,
-                'rows': 10,
+                'rows': 6,
                 'placeholder': _('Secret content goes here...'),
             }),
         }
