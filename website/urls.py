@@ -20,8 +20,8 @@ from django.contrib import admin
 from django.conf import settings
 
 
-admin.site.site_header = _('10minute secret')
-admin.site.site_title = _('10minute secret')
+admin.site.site_header = _('ten minute secret')
+admin.site.site_title = _('ten minute secret')
 admin.site.index_title = _('Dashboard')
 
 
