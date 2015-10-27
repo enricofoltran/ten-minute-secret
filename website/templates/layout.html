@@ -77,6 +77,9 @@
         <script type="text/javascript" src="{% static "js/vendor/fastclick.js" %}"></script>
         <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
         <script type="text/javascript" src="{% static "js/website.js" %}"></script>
+        {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+            {% include "ga.html" %}
+        {% endif %}
     {% endblock %}
 </body>
 </html>

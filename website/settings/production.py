@@ -7,6 +7,7 @@ from .base import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
+GOOGLE_ANALYTICS_PROPERTY_ID = os.environ['GOOGLE_ANALYTICS_PROPERTY_ID']
 SECRET_KNUTH_PRIME = int(os.environ['SECRET_KNUTH_PRIME'])
 SECRET_KNUTH_INVERSE = int(os.environ['SECRET_KNUTH_INVERSE'])
 SECRET_KNUTH_RANDOM = int(os.environ['SECRET_KNUTH_RANDOM'])
