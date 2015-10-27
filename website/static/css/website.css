@@ -12,6 +12,22 @@ section[role=main] {
     margin-top: 1em;
 }
 
+footer[role=contentinfo] {
+    color: #CCC;
+}
+
+pre {
+    overflow: auto;
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+}
+
+code, kbd, pre, samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 pre {
     display: block;
     padding: 9.5px;
@@ -21,16 +37,4 @@ pre {
     word-wrap: break-word;
     background-color: #F5F5F5;
     border: 1px solid #CCC;
-}
-
-code, kbd, pre, samp {
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-code, kbd, pre, samp {
-    font-family: monospace, monospace;
-}
-
-pre {
-    overflow: auto;
 }
