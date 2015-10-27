@@ -122,5 +122,6 @@ CRISPY_TEMPLATE_PACK = 'foundation-5'
 # CSP
 CSP_DEFAULT_SRC = (
     "'self'",
+    "https://www.google-analytics.com/"
 )
 CSP_EXCLUDE_URL_PREFIXES = ('/!', )
