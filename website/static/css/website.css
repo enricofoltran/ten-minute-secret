@@ -8,6 +8,11 @@
     color: #F4F379;
 }
 
+.browsehappy {
+    border: none;
+    margin-bottom: 0px;
+}
+
 section[role=main] {
     margin-top: 1em;
 }
