@@ -121,4 +121,4 @@ CRISPY_TEMPLATE_PACK = 'foundation-5'
 CSP_DEFAULT_SRC = (
     "'self'",
 )
-CSP_EXCLUDE_URL_PREFIXES = ('/-', )
+CSP_EXCLUDE_URL_PREFIXES = ('/!', )

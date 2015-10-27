@@ -27,6 +27,10 @@ class Secret(models.Model):
     def oid(self):
         return knuth_encode(self.pk)
 
+    @property
+    def size(self):
+        return len(bytes(self.data.encode('utf-8')))
+
     def __str__(self):
         return self.oid.__str__()
 

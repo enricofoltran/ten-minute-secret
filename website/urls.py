@@ -27,7 +27,7 @@ admin.site.index_title = _('Dashboard')
 
 urlpatterns = [
     url(r'', include('secrets.urls', 'secrets')),
-    url(r'^-/', include(admin.site.urls)),
+    url(r'^!/', include(admin.site.urls)),
 ]
 
 if settings.DEBUG:

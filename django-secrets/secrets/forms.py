@@ -1,4 +1,5 @@
 from cryptography.fernet import InvalidToken
+from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from .models import Secret
@@ -32,6 +33,18 @@ class SecretCreateForm(forms.ModelForm):
             }
         }
 
+    def clean_data(self):
+        max_size = 50 * 1024
+        data = self.cleaned_data['data']
+        size = len(bytes(data.encode('utf-8')))
+
+        if size > max_size:
+            raise forms.ValidationError(
+                _('Oops! The maximum secret size is %(max)s') % {'max': filesizeformat(max_size)}
+            )
+
+        return data
+
     def save(self, force_insert=False, force_update=False, commit=True):
         passphrase = self.cleaned_data['passphrase']
         data = self.cleaned_data['data']
@@ -64,3 +77,5 @@ class SecretUpdateForm(forms.ModelForm):
             self.instance.decrypted_data = decrypt(self.instance.data, passphrase)
         except InvalidToken as e:
             raise forms.ValidationError(_('Oops! Double check that passphrase'))
+
+        return passphrase
