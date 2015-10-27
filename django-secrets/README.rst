@@ -12,7 +12,11 @@ Quick start
         'secrets',
     )
 
-2. Run `python manage.py migrate` to create the secrets models.
+2. Update your urls setting like this::
 
-3. Start the development server and visit http://127.0.0.1:8000/admin/
-   (you'll need the Admin app enabled).
+    urlpatterns = [
+        url(r'', include('secrets.urls', 'secrets')),
+        //...
+    ]
+
+3. Run `python manage.py migrate` to create the secrets models.

@@ -35,5 +35,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     ],
 )
