@@ -8,8 +8,11 @@ from .utils import encrypt, decrypt
 
 class SecretCreateForm(forms.ModelForm):
     passphrase = forms.CharField(
-        widget=forms.TextInput(attrs={'autocomplete':'off'}),
-        help_text=_("A word or phrase that's difficult to guess."),
+        widget=forms.TextInput(attrs={
+            'autocomplete': 'off',
+            'placeholder': _('A word or phrase that\'s difficult to guess'),
+        }),
+        help_text=_("We don't store the passphrase."),
         error_messages={
             'required': _('Oops! Double check that passphrase'),
         })
@@ -61,7 +64,7 @@ class SecretUpdateForm(forms.ModelForm):
     passphrase = forms.CharField(
         widget=forms.TextInput(attrs={'autocomplete':'off'}),
         label=_('Passphrase'),
-        help_text=_('careful: we will only show it once.'),
+        help_text=_('We will only show it once.'),
         error_messages={
             'required': _('Oops! Double check that passphrase'),
         })
