@@ -18,7 +18,7 @@ class KnuthIdMixin(object):
                                  "an object oid."
                                  % self.__class__.__name__)
 
-        pk = knuth_decode(int(oid))
+        pk = knuth_decode(oid)
         queryset = queryset.filter(pk=pk)
 
         try:

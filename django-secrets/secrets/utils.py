@@ -1,4 +1,4 @@
-import os, base64
+import os, struct, base64
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 from cryptography.fernet import Fernet, InvalidToken
@@ -12,12 +12,16 @@ KNUTH_RANDOM = getattr(settings, 'SECRET_KNUTH_RANDOM', 1163945558)
 KNUTH_MAX_INT = getattr(settings, 'SECRET_KNUTH_MAX_INT', 2147483647)
 
 
-def knuth_encode(n):
-    return ((n * KNUTH_PRIME) & KNUTH_MAX_INT) ^ KNUTH_RANDOM
+def knuth_encode(uid):
+    oid = ((uid * KNUTH_PRIME) & KNUTH_MAX_INT) ^ KNUTH_RANDOM
+    return base64.urlsafe_b64encode(struct.pack('!L', oid))[:6]
 
 
-def knuth_decode(n):
-    return ((n ^ KNUTH_RANDOM) * KNUTH_INVERSE) & KNUTH_MAX_INT
+def knuth_decode(oid):
+    padded = (oid + "==").encode('utf-8')
+    decoded = struct.unpack('!L', base64.urlsafe_b64decode(padded))[0]
+    uid = ((decoded ^ KNUTH_RANDOM) * KNUTH_INVERSE) & KNUTH_MAX_INT
+    return uid
 
 
 def passphrase_to_key(passphrase):
