@@ -15,7 +15,7 @@ SECRET_KNUTH_RANDOM = int(os.environ['SECRET_KNUTH_RANDOM'])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ten-minute-secret.herokuapp.com', ]
+ALLOWED_HOSTS = ['xms.herokuapp.com', ]
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
