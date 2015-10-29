@@ -62,7 +62,7 @@ class SecretCreateForm(forms.ModelForm):
 
 class SecretUpdateForm(forms.ModelForm):
     passphrase = forms.CharField(
-        widget=forms.TextInput(attrs={'autocomplete':'off'}),
+        widget=forms.PasswordInput(attrs={'autocomplete':'off'}),
         label=_('Passphrase'),
         help_text=_('We will only show it once.'),
         error_messages={
