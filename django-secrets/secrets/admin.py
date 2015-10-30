@@ -1,5 +1,6 @@
-from django.utils.translation import ugettext_lazy as _
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.template.defaultfilters import filesizeformat
+from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 from django.contrib import admin
 from .models import Secret
@@ -8,10 +9,11 @@ from .models import Secret
 class SecretAdmin(admin.ModelAdmin):
     actions = ('delete', )
     list_display_links = None
-    list_display = ('on_site', 'pretty_size', 'views', 'updated_at', 'created_at', )
-    list_filter = ('updated_at', 'created_at', )
+    list_display = ('id', 'on_site', 'pretty_size', 'pretty_expire_at',
+                    'created_at', )
+    list_filter = ('created_at', )
     date_hierarchy = 'created_at'
-    ordering = ('-created_at', '-updated_at', )
+    ordering = ('-created_at', )
 
     def has_add_permission(self, request):
         return False
@@ -19,6 +21,10 @@ class SecretAdmin(admin.ModelAdmin):
     def pretty_size(self, obj):
         return filesizeformat(obj.size)
     pretty_size.short_description = _('size')
+
+    def pretty_expire_at(self, obj):
+        return naturaltime(obj.expire_at)
+    pretty_expire_at.short_description = _('expire at')
 
     def on_site(self, obj):
         return format_html(

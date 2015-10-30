@@ -19,14 +19,13 @@ class SecretUpdateView(KnuthIdMixin, UpdateView):
     template_name_suffix = '_update'
 
     @classmethod
-    def as_view(cls, **initkwargs):
-        view = super(SecretUpdateView, cls).as_view(**initkwargs)
+    def as_view(cls, **kwargs):
+        view = super(SecretUpdateView, cls).as_view(**kwargs)
         return never_cache(view)
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.views += 1
-        self.object.save()
+        self.object.delete()
 
         return render_to_response('secrets/secret_detail.html', {
             "request": self.request,

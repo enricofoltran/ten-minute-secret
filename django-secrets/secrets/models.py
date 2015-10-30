@@ -1,3 +1,4 @@
+import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.utils.timezone import utc
@@ -10,12 +11,8 @@ from .utils import knuth_encode
 class Secret(models.Model):
     data = models.TextField(
         verbose_name=_('data'))
-    views = models.PositiveIntegerField(
-        verbose_name=_('views'), default=0)
     created_at = models.DateTimeField(
         verbose_name=_("created at"), auto_now_add=True, editable=False, )
-    updated_at = models.DateTimeField(
-        verbose_name=_("updated at"), auto_now=True, editable=False)
 
     objects = models.Manager()
     available = AvailableManager()
@@ -29,7 +26,13 @@ class Secret(models.Model):
 
     @property
     def size(self):
-        return len(bytes(self.data.encode('utf-8')))
+        return len(self.data.encode('utf-8'))
+
+    @property
+    def expire_at(self):
+        created_at = self.created_at.replace(tzinfo=utc)
+        expire_at = created_at + datetime.timedelta(minutes=10)
+        return expire_at
 
     def __str__(self):
         return self.oid.__str__()
