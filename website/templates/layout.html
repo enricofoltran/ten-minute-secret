@@ -34,9 +34,12 @@
             <li class="name">
                 <h1><a href="/">ten minute secret</a></h1>
             </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
         </ul>
         <section class="top-bar-section">
-            <ul class="left"></ul>
+            <ul class="left">
+                <li><a href="{% url "about" %}">about</a></li>
+            </ul>
             <ul class="right"></ul>
         </section>
         {% endblock %}
@@ -45,13 +48,7 @@
 
     {% block header_wrapper %}
     <header role="banner">
-        {% block header %}
-            <div class="row">
-                <div class="column large-12 text-center">
-                    <h4>Share encrypted messages easily, they last 10 minutes.</h4>
-                </div>
-            </div>
-        {% endblock %}
+        {% block header %}{% endblock %}
     </header>
     {% endblock %}
 
@@ -67,7 +64,7 @@
                     <p class="text-muted">
                         <small>
                             Copyright &copy; <time datetime="{% now "Y" %}">{% now "Y" %}</time> <b>Enrico Foltran</b>.
-                            The code is <a href="https://github.com/enricofoltran/ten-minute-secret">opensource</a>.
+                            By using this website you agree to the <a href="{% url "terms" %}">Terms of Service</a>.
                         </small>
                     </p>
                 </div>

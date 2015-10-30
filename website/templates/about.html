@@ -1,0 +1,32 @@
+    {% extends "layout.html" %}
+
+    {% block main %}
+        <div class="row">
+            <div class="column large-centered large-8">
+                <h3>About Us</h3>
+                <p>
+                    I'm Enrico and I built ten minute secret as a way to share encrypted
+                    messages that's both simple and secure.
+                    All of the code is <a target="_blank" href="https://github.com/enricofoltran/ten-minute-secret">open-source</a>
+                    and available on <a target="_blank" href="https://github.com">Github</a>.
+                </p>
+                <p>If you have any questions, contact me at enrico@foltran.xyz.</p>
+                <p>
+                    Happy sharing, <br />
+                    Enrico
+                </p>
+                <h3>F.A.Q.</h3>
+                <h4>Can I retrieve a secret that has already been viewed?</h4>
+                <p>No. We display it once.</p>
+                <h4>How long do you keep non-viewed secrets?</h4>
+                <p>We keep secrets for 10 minutes.</p>
+                <h4>What is the maximum secret size?</h4>
+                <p>The maximum size is 50KB.</p>
+                <h4>Why should I trust you?</h4>
+                <p>We don't store the passphrase so we can
+                 never know what the secret is because we can't decrypt it.</p>
+                <p>The code is <a target="_blank" href="https://github.com/enricofoltran/ten-minute-secret">open-source</a>
+                so you can review it and/or run your own instance.</p>
+            </div>
+        </div>
+    {% endblock %}
