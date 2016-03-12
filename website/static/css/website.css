@@ -4,7 +4,8 @@
 }
 
 .hint {
-    color: red;
+    color: #ec5840;
+    margin-bottom: 1rem;
 }
 
 section[role=main] {
@@ -25,21 +26,18 @@ footer a:active {
     color: #888;
 }
 
-.top-bar {
+.top-bar, .top-bar ul, .title-bar {
     background:#417690;
-    color: #FFF;
-    margin-bottom: 2.250rem;
 }
-.top-bar .name h1 a,.top-bar .name h2 a,.top-bar .name h3 a,.top-bar .name h4 a,.top-bar .name p a,.top-bar .name span a {
+
+.top-bar .menu-text a {
     color:#F4F379;
 }
-.top-bar.expanded .title-area {
-    background:#417690;
+.menu > li > a {
+    color: #FFF;
 }
-.top-bar-section ul li {
-    background:#417690;
-}
-.top-bar-section li:not(.has-form) a:not(.button),
-.top-bar-section li:not(.has-form) a:hover:not(.button) {
-    background: transparent;
+
+header[role=banner] {
+    margin-top: 3.375rem;
+    margin-bottom: 2.250rem;
 }

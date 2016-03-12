@@ -3,14 +3,13 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ten minute secret{% endblock %}</title>
     <meta name="description" content="Share encrypted messages easily, they last 10 minutes">
     {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{% static "css/normalize.css" %}">
         <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
         <link rel="stylesheet" type="text/css" href="{% static "css/website.css" %}">
-        <script type="text/javascript" src="{% static "js/vendor/modernizr.js" %}"></script>
     {% endblock %}
 
     {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
@@ -20,30 +19,31 @@
 <body>
     {% block browsehappy %}
     <!--[if lt IE 8]>
-    <div data-alert class="alert-box secondary browsehappy">
-        You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-        <a href="#" class="close">&times;</a>
+    <div class="browsehappy callout warning">
+        <p>
+            You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+        </p>
     </div>
     <![endif]-->
     {% endblock %}
 
     {% block navigation_wrapper %}
-    <nav class="top-bar" data-topbar="">
+    <div class="title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle></button>
+        <div class="title-bar-title">Menu</div>
+    </div>
+    <div class="top-bar" id="top-menu">
         {% block navigation %}
-        <ul class="title-area">
-            <li class="name">
-                <h1><a href="/">ten minute secret</a></h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-        </ul>
-        <section class="top-bar-section">
-            <ul class="left">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">
+                    <a href="/">ten minute secret</a>
+                </li>
                 <li><a href="{% url "about" %}">about</a></li>
             </ul>
-            <ul class="right"></ul>
-        </section>
+        </div>
         {% endblock %}
-    </nav>
+    </div>
     {% endblock %}
 
     {% block header_wrapper %}
@@ -74,8 +74,8 @@
     {% endblock %}
 
     {% block javascripts %}
-        <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/vendor/fastclick.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/vendor/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/vendor/what-input.min.js" %}"></script>
         <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
         <script type="text/javascript" src="{% static "js/website.js" %}"></script>
     {% endblock %}
