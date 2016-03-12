@@ -32,7 +32,3 @@ urlpatterns = [
     url(r'^terms/$', TemplateView.as_view(template_name="terms.html"), name="terms"),
     url(r'^!/', include(admin.site.urls)),
 ]
-
-if settings.DEBUG:
-    urlpatterns += patterns(
-        '', ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
