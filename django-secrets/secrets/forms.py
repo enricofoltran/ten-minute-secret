@@ -1,9 +1,10 @@
+import uuid
 from cryptography.fernet import InvalidToken
 from django.template.defaultfilters import filesizeformat
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django import forms
 from .models import Secret
-from .utils import encrypt, decrypt
+from .utils import encrypt, decrypt, generate_salt
 
 
 class SecretCreateForm(forms.ModelForm):
@@ -53,7 +54,14 @@ class SecretCreateForm(forms.ModelForm):
         data = self.cleaned_data['data']
 
         instance = super(SecretCreateForm, self).save(commit=False)
-        instance.data = encrypt(data, passphrase)
+
+        # Generate UUID and unique salt for this secret
+        instance.id = uuid.uuid4()
+        salt = generate_salt()
+        instance.salt = salt
+
+        # Encrypt with unique salt
+        instance.data = encrypt(data, passphrase, salt)
 
         if commit:
             instance.save()
@@ -77,8 +85,11 @@ class SecretUpdateForm(forms.ModelForm):
         passphrase = self.cleaned_data['passphrase']
 
         try:
-            self.instance.decrypted_data = decrypt(self.instance.data, passphrase)
+            # Use the unique salt stored with this secret
+            self.instance.decrypted_data = decrypt(self.instance.data, passphrase, bytes(self.instance.salt))
         except InvalidToken as e:
             raise forms.ValidationError(_('Oops! Double check that passphrase'))
+        except Exception as e:
+            raise forms.ValidationError(_('Error decrypting secret'))
 
         return passphrase

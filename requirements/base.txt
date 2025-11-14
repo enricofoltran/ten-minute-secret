@@ -1,9 +1,10 @@
-Django==1.9.4
-pytz==2015.7
-django-csp==2.0.3
-whitenoise==2.0.6
-cryptography==1.2.3
-django-crispy-forms==1.6.0
-crispy-forms-foundation==0.5.4
+Django==4.2.11
+pytz==2024.1
+django-csp==4.0b1
+whitenoise==6.6.0
+cryptography==42.0.5
+django-crispy-forms==2.1
+crispy-forms-foundation==0.9.3
+django-ratelimit==4.1.0
 
 -e django-secrets/
