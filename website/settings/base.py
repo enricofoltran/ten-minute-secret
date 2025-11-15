@@ -130,11 +130,11 @@ FIXTURE_DIRS = (
     os.path.join(BASE_DIR, "fixtures"),
 )
 
-# Add 'foundation' layout pack (crispy-forms-foundation 1.1.0 uses 'foundation')
-CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation', )
+# Add 'foundation-6' layout pack (crispy-forms-foundation 0.9.0)
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-6', )
 
 # Default layout to use with "crispy_forms"
-CRISPY_TEMPLATE_PACK = 'foundation'
+CRISPY_TEMPLATE_PACK = 'foundation-6'
 
 # CSP - Removed unsafe-inline for better XSS protection
 CSP_DEFAULT_SRC = ("'self'",)
