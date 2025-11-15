@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'crispy_forms_foundation',
 
-    'secrets',
+    'django_secrets',
 )
 
 MIDDLEWARE = [

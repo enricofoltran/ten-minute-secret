@@ -16,7 +16,7 @@ admin.site.index_title = _('Dashboard')
 
 
 urlpatterns = [
-    path('', include('secrets.urls')),
+    path('', include('django_secrets.urls')),
     path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
     path('terms/', TemplateView.as_view(template_name="terms.html"), name="terms"),
     path('!/', admin.site.urls),
