@@ -43,6 +43,6 @@ class SecretUpdateView(KnuthIdMixin, UpdateView):
         # Delete the secret after successful retrieval
         self.object.delete()
 
-        return render(self.request, 'secrets/secret_detail.html', {
+        return render(self.request, 'django_secrets/secret_detail.html', {
             "object": self.object,
         })
