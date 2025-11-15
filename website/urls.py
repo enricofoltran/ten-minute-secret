@@ -16,8 +16,10 @@ admin.site.index_title = _('Dashboard')
 
 
 urlpatterns = [
-    path('', include('django_secrets.urls')),
+    # Specific paths must come before the catch-all django_secrets URLs
     path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
     path('terms/', TemplateView.as_view(template_name="terms.html"), name="terms"),
     path('!/', admin.site.urls),
+    # Catch-all for secrets (must be last)
+    path('', include('django_secrets.urls')),
 ]
