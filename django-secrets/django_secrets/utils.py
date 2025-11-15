@@ -55,12 +55,13 @@ def passphrase_to_key(passphrase, salt):
 def encrypt(data, passphrase, salt):
     """
     Encrypt data with passphrase using unique salt.
-    Returns encrypted bytes.
+    Returns base64-encoded string (for storage in TextField).
     """
     key = passphrase_to_key(passphrase, salt)
     plain = data.encode('utf-8')
-    encrypted = Fernet(key).encrypt(plain)
-    return encrypted
+    encrypted_bytes = Fernet(key).encrypt(plain)
+    # Encode as base64 string for TextField storage
+    return base64.b64encode(encrypted_bytes).decode('ascii')
 
 
 def decrypt(token, passphrase, salt):
@@ -70,10 +71,10 @@ def decrypt(token, passphrase, salt):
     """
     key = passphrase_to_key(passphrase, salt)
 
-    # Handle both string and bytes input
+    # Decode from base64 string to bytes
     if isinstance(token, str):
-        token = token.encode('utf-8')
+        token = base64.b64decode(token.encode('ascii'))
 
     decrypted_bytes = Fernet(key).decrypt(token)
-    # FIXED: Decode bytes to string before returning
+    # Decode bytes to string before returning
     return decrypted_bytes.decode('utf-8')
