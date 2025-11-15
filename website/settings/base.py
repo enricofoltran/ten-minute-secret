@@ -16,6 +16,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GOOGLE_ANALYTICS_PROPERTY_ID = False
 
+# Default primary key field type (Django 4.2+)
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 ADMINS = (
     ('Enrico Foltran', 'enrico@foltran.xyz'),
 )
@@ -33,21 +36,20 @@ INSTALLED_APPS = (
     'crispy_forms',
     'crispy_forms_foundation',
 
-    'secrets',
+    'django_secrets',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'csp.middleware.CSPMiddleware',
-    'django.contrib.sites.middleware.CurrentSiteMiddleware',
-)
+]
 
 ROOT_URLCONF = 'website.urls'
 
@@ -88,6 +90,14 @@ USE_TZ = True
 
 # USE_ETAGS = True
 
+# Cache configuration for rate limiting
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
@@ -99,7 +109,14 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_URL = '/media/'
 
@@ -113,16 +130,15 @@ FIXTURE_DIRS = (
     os.path.join(BASE_DIR, "fixtures"),
 )
 
-# Add 'foundation-5' layout pack
-CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-5', )
+# Add 'foundation-6' layout pack (crispy-forms-foundation 0.9.0)
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-6', )
 
 # Default layout to use with "crispy_forms"
-CRISPY_TEMPLATE_PACK = 'foundation-5'
+CRISPY_TEMPLATE_PACK = 'foundation-6'
 
-# CSP
-CSP_DEFAULT_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-    "https://www.google-analytics.com/"
-)
+# CSP - Removed unsafe-inline for better XSS protection
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "https://www.google-analytics.com/", "https://cdn.jsdelivr.net/")
+CSP_STYLE_SRC = ("'self'", "https://cdn.jsdelivr.net/")
+CSP_IMG_SRC = ("'self'", "https://www.google-analytics.com/", "data:")
 CSP_EXCLUDE_URL_PREFIXES = ('/!', )

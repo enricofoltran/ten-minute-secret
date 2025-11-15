@@ -1,9 +1,9 @@
-{% extends "layout.html" %}{% load staticfiles %}
+{% extends "layout.html" %}{% load static %}
 
 {% block javascripts %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static "secrets/js/clipboard.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "secrets/js/secrets.js" %}"></script>
+    <script type="text/javascript" src="{% static "django_secrets/js/clipboard.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "django_secrets/js/secrets.js" %}"></script>
 {% endblock %}
 
 {% block header %}

@@ -7,12 +7,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('secrets', '0001_initial'),
+        ('django_secrets', '0002_remove_secret_views'),
     ]
 
     operations = [
         migrations.RemoveField(
             model_name='secret',
-            name='views',
+            name='updated_at',
         ),
     ]

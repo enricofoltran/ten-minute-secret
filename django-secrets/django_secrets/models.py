@@ -1,18 +1,25 @@
 import datetime
-from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
+from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 from django.utils.timezone import utc
 from django.conf import settings
 from django.db import models
 from .managers import AvailableManager
-from .utils import knuth_encode
+from .utils import encode_id
 
 
 class Secret(models.Model):
+    # Use UUIDField for secure, unguessable IDs
+    id = models.UUIDField(primary_key=True, default=None, editable=False)
     data = models.TextField(
         verbose_name=_('data'))
+    # Store unique salt for each secret (CRITICAL for security)
+    salt = models.BinaryField(
+        max_length=16,
+        verbose_name=_('salt'),
+        help_text=_('Unique salt for key derivation'))
     created_at = models.DateTimeField(
-        verbose_name=_("created at"), auto_now_add=True, editable=False, )
+        verbose_name=_("created at"), auto_now_add=True, editable=False)
 
     objects = models.Manager()
     available = AvailableManager()
@@ -22,7 +29,8 @@ class Secret(models.Model):
 
     @property
     def oid(self):
-        return knuth_encode(self.pk)
+        """Obfuscated ID for URLs - uses UUID encoding"""
+        return encode_id(self.pk)
 
     @property
     def size(self):
@@ -35,7 +43,7 @@ class Secret(models.Model):
         return expire_at
 
     def __str__(self):
-        return self.oid.__str__()
+        return str(self.oid)
 
     def get_absolute_url(self):
         return reverse('secrets:secret-update', kwargs={'oid': self.oid})

@@ -1,10 +1,11 @@
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.http import Http404
-from .utils import knuth_decode
+from .utils import decode_id
 
 
 class KnuthIdMixin(object):
+    """Mixin for views that use encoded UUID IDs in URLs"""
     knuth_id_url_kwarg = 'oid'
 
     def get_object(self, queryset=None):
@@ -18,7 +19,12 @@ class KnuthIdMixin(object):
                                  "an object oid."
                                  % self.__class__.__name__)
 
-        pk = knuth_decode(oid)
+        # Decode the base64-encoded UUID
+        pk = decode_id(oid)
+
+        if pk is None:
+            raise Http404(_("Invalid secret ID"))
+
         queryset = queryset.filter(pk=pk)
 
         try:

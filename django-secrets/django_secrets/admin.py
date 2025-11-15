@@ -1,6 +1,6 @@
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.template.defaultfilters import filesizeformat
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.html import format_html
 from django.contrib import admin
 from .models import Secret
@@ -32,7 +32,6 @@ class SecretAdmin(admin.ModelAdmin):
             url=obj.get_absolute_url(), oid=obj.oid
         )
     on_site.short_description = _('View on site')
-    on_site.allow_tags = True
 
 
 admin.site.register(Secret, SecretAdmin)
