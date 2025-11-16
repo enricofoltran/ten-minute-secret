@@ -129,6 +129,8 @@ target/
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
+venv/
+.venv/
 
 
 ### Django ###

@@ -21,3 +21,13 @@ DATABASES = {
         'NAME': ':memory',
     }
 }
+
+# Use simple static file storage for tests (no manifest)
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
